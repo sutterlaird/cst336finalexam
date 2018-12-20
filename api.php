@@ -20,10 +20,10 @@ switch($httpMethod) {
     break;
     
   case 'POST':
-    $servername = 'localhost';
-    $username = 'databaseaccess';
-    $password = 'cst336';
-    $database = 'final'; 
+    $servername = 'sutterlaird.com';
+    $username = 'sutterla_final';
+    $password = 'cst336final';
+    $database = 'sutterla_finalexam';
     
     $dbConn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
     $dbConn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
