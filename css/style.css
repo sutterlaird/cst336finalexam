@@ -1,0 +1,21 @@
+.raceButton {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.rubric-done {
+    color: green;
+}
+
+.rubric-progress {
+    color: yellow;
+}
+
+.rubric-missing {
+    color: red;
+}
+
+#addRacePlusButton {
+    cursor: pointer;
+}

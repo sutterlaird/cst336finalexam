@@ -1,0 +1,211 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
+        <script src="scripts/engine.js"></script>
+    </head>
+    <body onload="init()">
+        <!--Main Layout Code-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2">
+                </div>
+                <div class="col-sm">
+                    <div id="content"></div>
+                </div>
+                <div class="col-sm-2">
+                </div>
+            </div>
+        </div>
+        
+        <div id="racesList" class="d-none">
+            <h2 class="text-center">Upcoming Races</h2>
+            <img src="img/add.png" id="addRacePlusButton" onclick="newRaceModal()">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Start Time</th>
+                  <th scope="col">Location</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="racesListInner">
+              </tbody>
+            </table>
+        </div>
+        
+        
+        <!--Edit modal code-->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Edit Race</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        Content goes here
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type='button' id="addRaceButton" class='btn btn-primary d-none' onclick='addRace()'>Add Race</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <!--Cancel modal code-->
+        <div class="modal fade" id="cancelConfirmModal" tabindex="-1" role="dialog" aria-labelledby="cancelConfirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cancelConfirmModalLabel">Confirm Cancellation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to cancel this race?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" id="cancelConfirmation" data-dismiss="modal">Cancel Race</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        <!--Rubric code-->
+        <div id="rubric">
+            <br/><br/><br/><br/>
+            <table>
+                <thead>
+                <tr>
+                <th style="text-align:left">#</th>
+                <th style="text-align:left">Task Description</th>
+                <th style="text-align:left">Points</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <td style="text-align:left" class="rubric-done">1</td>
+                <td style="text-align:left" class="rubric-done">You provide a ERD diagram representing the data and its relationships, with at least one transactional and one code table. This may be included in Cloud9 as a picture or from a designer tool</td>
+                <td style="text-align:left" class="rubric-done">15</td>
+                </tr>
+                <tr>
+                <td style="text-align:left" class="rubric-progress">2</td>
+                <td style="text-align:left" class="rubric-progress">Tables in MySQL match the ERD and support the requirements of the application</td>
+                <td style="text-align:left" class="rubric-progress">25</td>
+                </tr>
+                <tr>
+                <td style="text-align:left" class="rubric-done">3</td>
+                <td style="text-align:left" class="rubric-done">The list of races is pulled from MySQL using AJAX and the API endpoint, and displayed using the specified page design</td>
+                <td style="text-align:left" class="rubric-done">35</td>
+                </tr>
+                <tr>
+                <td style="text-align:left" class="rubric-done">4</td>
+                <td style="text-align:left" class="rubric-done">Canceled races do not show up in the Dashboard list</td>
+                <td style="text-align:left" class="rubric-done">5</td>
+                </tr>
+                <tr>
+                <td style="text-align:left" class="rubric-done">5</td>
+                <td style="text-align:left" class="rubric-done">Old races do not show up in the Dashboard list</td>
+                <td style="text-align:left" class="rubric-done">5</td>
+                </tr>
+                <tr>
+                <td style="text-align:left" class="rubric-done">6</td>
+                <td style="text-align:left" class="rubric-done">A user can add a race to the MySQL using the API endpoint and displayed using the specified modal design</td>
+                <td style="text-align:left" class="rubric-done">15</td>
+                </tr>
+                <tr>
+                <td style="text-align:left"></td>
+                <td style="text-align:left">TOTAL</td>
+                <td style="text-align:left">100</td>
+                </tr>
+                <tr>
+                <td style="text-align:left" class="rubric-done"></td>
+                <td style="text-align:left" class="rubric-done">This rubric is properly included AND UPDATED (BONUS)</td>
+                <td style="text-align:left" class="rubric-done">2</td>
+                </tr>
+                <tr>
+                <td style="text-align:left" class="rubric-missing">BD</td>
+                <td style="text-align:left" class="rubric-missing">Add a report that shows the number of racers and number of different cars for each race</td>
+                <td style="text-align:left" class="rubric-missing">15</td>
+                </tr>
+                <tr>
+                <td style="text-align:left" class="rubric-done">BD</td>
+                <td style="text-align:left" class="rubric-done">A user can cancel a race in MySQL using the API endpoint</td>
+                <td style="text-align:left" class="rubric-done">15</td>
+                </tr>
+                <tr>
+                <td style="text-align:left" class="rubric-done">BD</td>
+                <td style="text-align:left" class="rubric-done">The user confirms the cancelation using the specified modal design</td>
+                <td style="text-align:left" class="rubric-done">10</td>
+                </tr>
+                <tr>
+                <td style="text-align:left" class="rubric-missing">BD</td>
+                <td style="text-align:left" class="rubric-missing">The app is deployed to Heroku</td>
+                <td style="text-align:left" class="rubric-missing">10</td>
+                </tr>
+                <tr>
+                <td style="text-align:left" class="rubric-missing">BD</td>
+                <td style="text-align:left" class="rubric-missing">A car image can be uploaded and displayed</td>
+                <td style="text-align:left" class="rubric-missing">20</td>
+                </tr>
+                <tr>
+                <td style="text-align:left" class="rubric-missing">BD</td>
+                <td style="text-align:left" class="rubric-missing">Racers can signup for a race</td>
+                <td style="text-align:left" class="rubric-missing">20</td>
+                </tr>
+                <tr>
+                <td style="text-align:left" class="rubric-missing">BD</td>
+                <td style="text-align:left" class="rubric-missing">When racers signup, they can pick the make, model and year of their car using the API. <i>This does not require adding the race...just integrating the API on the modal.</i></td>
+                <td style="text-align:left" class="rubric-missing">35</td>
+                </tr>
+                <tr>
+                <td style="text-align:left" class="rubric-missing">BD</td>
+                <td style="text-align:left" class="rubric-missing">The race page shows the list of all racers who have signed up for the race, and the admin can open the race from the dashboard</td>
+                <td style="text-align:left" class="rubric-missing">25</td>
+                </tr>
+                <tr>
+                <td style="text-align:left" class="rubric-missing">BD</td>
+                <td style="text-align:left" class="rubric-missing">The race page is password protected</td>
+                <td style="text-align:left" class="rubric-missing">10</td>
+                </tr>
+                <tr>
+                <td style="text-align:left" class="rubric-missing">BD</td>
+                <td style="text-align:left" class="rubric-missing">Admins can see all the past races</td>
+                <td style="text-align:left" class="rubric-missing">20</td>
+                </tr>
+                <tr>
+                <td style="text-align:left" class="rubric-missing">BD</td>
+                <td style="text-align:left" class="rubric-missing">Users can filter records based on text that is showing</td>
+                <td style="text-align:left" class="rubric-missing">15</td>
+                </tr>
+                <tr>
+                <td style="text-align:left" class="rubric-missing">BD</td>
+                <td style="text-align:left" class="rubric-missing">Login works with a User table and BCrypt</td>
+                <td style="text-align:left" class="rubric-missing">20</td>
+                </tr>
+                <tr>
+                <td style="text-align:left" class="rubric-missing">BD</td>
+                <td style="text-align:left" class="rubric-missing">Google Maps shows the location of the race</td>
+                <td style="text-align:left" class="rubric-missing">5</td>
+                </tr>
+                </tbody>
+                </table>
+        </div>
+        
+    </body>
+</html>
